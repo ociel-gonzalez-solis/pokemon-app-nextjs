@@ -1,4 +1,4 @@
-import { Container, Image, Text } from "@nextui-org/react";
+import { Card, Container, Grid, Image, Text } from "@nextui-org/react";
 import { Layout } from "../../components/layouts";
 import { NotFavorites } from "../../components/UI";
 import { useEffect, useState } from "react";
@@ -13,7 +13,23 @@ const FavoritesPage = () => {
 
   return (
     <Layout title="Favorites - Pokemons">
-      <NotFavorites />
+      {favoritePokemons.length === 0 ? (
+        <NotFavorites />
+      ) : (
+        <Grid.Container gap={2} direction="row" justify="flex-start">
+          {favoritePokemons.map((id) => (
+            <Grid xs={6} sm={3} md={2} xl={1} key={id}>
+              <Card isHoverable isPressable css={{ padding: 10 }}>
+                <Card.Image
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
+                  width="100%"
+                  height={140}
+                />
+              </Card>
+            </Grid>
+          ))}
+        </Grid.Container>
+      )}
     </Layout>
   );
 };
